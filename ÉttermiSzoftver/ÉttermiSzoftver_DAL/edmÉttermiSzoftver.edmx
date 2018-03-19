@@ -15,9 +15,8 @@
         <EntityContainer Name="cnÉttermiSzoftver" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="enSzemelyek" EntityType="edmÉttermiSzoftver.enSzemely" />
           <EntitySet Name="enEtelek" EntityType="edmÉttermiSzoftver.enEtel" />
-          <EntitySet Name="enHozzavalok" EntityType="edmÉttermiSzoftver.enHozzavalo" />
           <EntitySet Name="enMenuk" EntityType="edmÉttermiSzoftver.enMenu" />
-          <EntitySet Name="enTipusok" EntityType="edmÉttermiSzoftver.enTipus" />
+          <EntitySet Name="enRendelesek" EntityType="edmÉttermiSzoftver.enRendeles" />
         </EntityContainer>
         <EntityType Name="enSzemely">
           <Key>
@@ -37,13 +36,7 @@
           <Property Name="Nev" Type="String" Nullable="false" />
           <Property Name="Ar" Type="String" Nullable="false" />
           <Property Name="Leiras" Type="String" Nullable="false" />
-        </EntityType>
-        <EntityType Name="enHozzavalo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nev" Type="String" Nullable="false" />
+          <Property Name="Tipus" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="enMenu">
           <Key>
@@ -52,12 +45,11 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Datum" Type="DateTime" Nullable="false" />
         </EntityType>
-        <EntityType Name="enTipus">
+        <EntityType Name="enRendeles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nev" Type="String" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
