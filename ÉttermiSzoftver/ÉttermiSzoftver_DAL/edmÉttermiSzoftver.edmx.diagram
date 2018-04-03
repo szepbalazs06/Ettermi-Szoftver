@@ -6,9 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f010a8f9d16147a7b94a2402de20ef82" Name="Diagram1" DisplayType="true" >
         <EntityTypeShape EntityType="edmÉttermiSzoftver.enSzemely" Width="1.5" PointX="0.5" PointY="0.625" />
-        <EntityTypeShape EntityType="edmÉttermiSzoftver.enEtel" Width="1.5" PointX="5.5" PointY="0.5" />
-        <EntityTypeShape EntityType="edmÉttermiSzoftver.enMenu" Width="1.5" PointX="5.5" PointY="3.125" />
-        <EntityTypeShape EntityType="edmÉttermiSzoftver.enRendeles" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="edmÉttermiSzoftver.enEtel" Width="1.5" PointX="4.875" PointY="0.625" />
+        <EntityTypeShape EntityType="edmÉttermiSzoftver.enMenu" Width="1.5" PointX="7" PointY="0.625" />
+        <EntityTypeShape EntityType="edmÉttermiSzoftver.enRendeles" Width="1.5" PointX="2.75" PointY="0.625" />
+        <AssociationConnector Association="edmÉttermiSzoftver.enSzemelyenRendeles" />
+        <AssociationConnector Association="edmÉttermiSzoftver.enRendelesenEtel" />
+        <AssociationConnector Association="edmÉttermiSzoftver.enEtelenMenu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

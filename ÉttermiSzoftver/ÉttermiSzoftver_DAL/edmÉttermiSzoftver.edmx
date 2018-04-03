@@ -17,6 +17,18 @@
           <EntitySet Name="enEtelek" EntityType="edmÉttermiSzoftver.enEtel" />
           <EntitySet Name="enMenuk" EntityType="edmÉttermiSzoftver.enMenu" />
           <EntitySet Name="enRendelesek" EntityType="edmÉttermiSzoftver.enRendeles" />
+          <AssociationSet Name="enSzemelyenRendeles" Association="edmÉttermiSzoftver.enSzemelyenRendeles">
+            <End Role="enSzemely" EntitySet="enSzemelyek" />
+            <End Role="enRendeles" EntitySet="enRendelesek" />
+          </AssociationSet>
+          <AssociationSet Name="enRendelesenEtel" Association="edmÉttermiSzoftver.enRendelesenEtel">
+            <End Role="enRendeles" EntitySet="enRendelesek" />
+            <End Role="enEtel" EntitySet="enEtelek" />
+          </AssociationSet>
+          <AssociationSet Name="enEtelenMenu" Association="edmÉttermiSzoftver.enEtelenMenu">
+            <End Role="enEtel" EntitySet="enEtelek" />
+            <End Role="enMenu" EntitySet="enMenuk" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="enSzemely">
           <Key>
@@ -27,6 +39,7 @@
           <Property Name="Pozicio" Type="String" Nullable="false" />
           <Property Name="Jelszo" Type="String" Nullable="false" />
           <Property Name="SzulDatum" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="enRendelesek" Relationship="edmÉttermiSzoftver.enSzemelyenRendeles" FromRole="enSzemely" ToRole="enRendeles" />
         </EntityType>
         <EntityType Name="enEtel">
           <Key>
@@ -37,6 +50,8 @@
           <Property Name="Ar" Type="String" Nullable="false" />
           <Property Name="Leiras" Type="String" Nullable="false" />
           <Property Name="Tipus" Type="String" Nullable="false" />
+          <NavigationProperty Name="enRendelesek" Relationship="edmÉttermiSzoftver.enRendelesenEtel" FromRole="enEtel" ToRole="enRendeles" />
+          <NavigationProperty Name="enMenuk" Relationship="edmÉttermiSzoftver.enEtelenMenu" FromRole="enEtel" ToRole="enMenu" />
         </EntityType>
         <EntityType Name="enMenu">
           <Key>
@@ -44,13 +59,33 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Datum" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="enEtelek" Relationship="edmÉttermiSzoftver.enEtelenMenu" FromRole="enMenu" ToRole="enEtel" />
         </EntityType>
         <EntityType Name="enRendeles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asztal" Type="String" Nullable="false" />
+          <Property Name="Allapot" Type="String" Nullable="false" />
+          <Property Name="Megjegyzes" Type="String" Nullable="false" />
+          <Property Name="Ido" Type="DateTime" Nullable="false" />
+          <Property Name="Szamlaszam" Type="String" Nullable="false" />
+          <NavigationProperty Name="enSzemelyek" Relationship="edmÉttermiSzoftver.enSzemelyenRendeles" FromRole="enRendeles" ToRole="enSzemely" />
+          <NavigationProperty Name="enEtelek" Relationship="edmÉttermiSzoftver.enRendelesenEtel" FromRole="enRendeles" ToRole="enEtel" />
         </EntityType>
+        <Association Name="enSzemelyenRendeles">
+          <End Type="edmÉttermiSzoftver.enSzemely" Role="enSzemely" Multiplicity="*" />
+          <End Type="edmÉttermiSzoftver.enRendeles" Role="enRendeles" Multiplicity="*" />
+        </Association>
+        <Association Name="enRendelesenEtel">
+          <End Type="edmÉttermiSzoftver.enRendeles" Role="enRendeles" Multiplicity="*" />
+          <End Type="edmÉttermiSzoftver.enEtel" Role="enEtel" Multiplicity="*" />
+        </Association>
+        <Association Name="enEtelenMenu">
+          <End Type="edmÉttermiSzoftver.enEtel" Role="enEtel" Multiplicity="*" />
+          <End Type="edmÉttermiSzoftver.enMenu" Role="enMenu" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
