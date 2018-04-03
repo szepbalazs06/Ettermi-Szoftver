@@ -52,6 +52,7 @@
           <Property Name="Tipus" Type="String" Nullable="false" />
           <NavigationProperty Name="enRendelesek" Relationship="edmÉttermiSzoftver.enRendelesenEtel" FromRole="enEtel" ToRole="enRendeles" />
           <NavigationProperty Name="enMenuk" Relationship="edmÉttermiSzoftver.enEtelenMenu" FromRole="enEtel" ToRole="enMenu" />
+          <Property Name="KepURL" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="enMenu">
           <Key>
