@@ -4,11 +4,176 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="edmÉttermiSzoftver.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="edmÉttermiSzoftverTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="edmÉttermiSzoftver.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="edmÉttermiSzoftverStoreContainer">
+    <EntitySet Name="enSzemelyek" EntityType="edmÉttermiSzoftver.Store.enSzemelyek" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="enEtelek" EntityType="edmÉttermiSzoftver.Store.enEtelek" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="enMenuk" EntityType="edmÉttermiSzoftver.Store.enMenuk" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="enRendelesek" EntityType="edmÉttermiSzoftver.Store.enRendelesek" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="enSzemelyenRendeles" EntityType="edmÉttermiSzoftver.Store.enSzemelyenRendeles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="enRendelesenEtel" EntityType="edmÉttermiSzoftver.Store.enRendelesenEtel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="enEtelenMenu" EntityType="edmÉttermiSzoftver.Store.enEtelenMenu" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_enSzemelyenRendeles_enSzemely" Association="edmÉttermiSzoftver.Store.FK_enSzemelyenRendeles_enSzemely">
+      <End Role="enSzemely" EntitySet="enSzemelyek" />
+      <End Role="enSzemelyenRendeles" EntitySet="enSzemelyenRendeles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_enSzemelyenRendeles_enRendeles" Association="edmÉttermiSzoftver.Store.FK_enSzemelyenRendeles_enRendeles">
+      <End Role="enRendeles" EntitySet="enRendelesek" />
+      <End Role="enSzemelyenRendeles" EntitySet="enSzemelyenRendeles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_enRendelesenEtel_enRendeles" Association="edmÉttermiSzoftver.Store.FK_enRendelesenEtel_enRendeles">
+      <End Role="enRendeles" EntitySet="enRendelesek" />
+      <End Role="enRendelesenEtel" EntitySet="enRendelesenEtel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_enRendelesenEtel_enEtel" Association="edmÉttermiSzoftver.Store.FK_enRendelesenEtel_enEtel">
+      <End Role="enEtel" EntitySet="enEtelek" />
+      <End Role="enRendelesenEtel" EntitySet="enRendelesenEtel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_enEtelenMenu_enEtel" Association="edmÉttermiSzoftver.Store.FK_enEtelenMenu_enEtel">
+      <End Role="enEtel" EntitySet="enEtelek" />
+      <End Role="enEtelenMenu" EntitySet="enEtelenMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_enEtelenMenu_enMenu" Association="edmÉttermiSzoftver.Store.FK_enEtelenMenu_enMenu">
+      <End Role="enMenu" EntitySet="enMenuk" />
+      <End Role="enEtelenMenu" EntitySet="enEtelenMenu" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="enSzemelyek">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Pozicio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Jelszo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SzulDatum" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="enEtelek">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ar" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Leiras" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tipus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="KepURL" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="enMenuk">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Datum" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="enRendelesek">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Asztal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Allapot" Type="tinyint" Nullable="false" />
+    <Property Name="Megjegyzes" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ido" Type="datetime" Nullable="false" />
+    <Property Name="Szamlaszam" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="enSzemelyenRendeles">
+    <Key>
+      <PropertyRef Name="enSzemelyek_Id" />
+      <PropertyRef Name="enRendelesek_Id" />
+    </Key>
+    <Property Name="enSzemelyek_Id" Type="int" Nullable="false" />
+    <Property Name="enRendelesek_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="enRendelesenEtel">
+    <Key>
+      <PropertyRef Name="enRendelesek_Id" />
+      <PropertyRef Name="enEtelek_Id" />
+    </Key>
+    <Property Name="enRendelesek_Id" Type="int" Nullable="false" />
+    <Property Name="enEtelek_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="enEtelenMenu">
+    <Key>
+      <PropertyRef Name="enEtelek_Id" />
+      <PropertyRef Name="enMenuk_Id" />
+    </Key>
+    <Property Name="enEtelek_Id" Type="int" Nullable="false" />
+    <Property Name="enMenuk_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_enSzemelyenRendeles_enSzemely">
+    <End Role="enSzemely" Type="edmÉttermiSzoftver.Store.enSzemelyek" Multiplicity="1" />
+    <End Role="enSzemelyenRendeles" Type="edmÉttermiSzoftver.Store.enSzemelyenRendeles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enSzemely">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="enSzemelyenRendeles">
+        <PropertyRef Name="enSzemelyek_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_enSzemelyenRendeles_enRendeles">
+    <End Role="enSzemelyenRendeles" Type="edmÉttermiSzoftver.Store.enSzemelyenRendeles" Multiplicity="*" />
+    <End Role="enRendeles" Type="edmÉttermiSzoftver.Store.enRendelesek" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="enRendeles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="enSzemelyenRendeles">
+        <PropertyRef Name="enRendelesek_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_enRendelesenEtel_enRendeles">
+    <End Role="enRendeles" Type="edmÉttermiSzoftver.Store.enRendelesek" Multiplicity="1" />
+    <End Role="enRendelesenEtel" Type="edmÉttermiSzoftver.Store.enRendelesenEtel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enRendeles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="enRendelesenEtel">
+        <PropertyRef Name="enRendelesek_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_enRendelesenEtel_enEtel">
+    <End Role="enRendelesenEtel" Type="edmÉttermiSzoftver.Store.enRendelesenEtel" Multiplicity="*" />
+    <End Role="enEtel" Type="edmÉttermiSzoftver.Store.enEtelek" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="enEtel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="enRendelesenEtel">
+        <PropertyRef Name="enEtelek_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_enEtelenMenu_enEtel">
+    <End Role="enEtel" Type="edmÉttermiSzoftver.Store.enEtelek" Multiplicity="1" />
+    <End Role="enEtelenMenu" Type="edmÉttermiSzoftver.Store.enEtelenMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="enEtel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="enEtelenMenu">
+        <PropertyRef Name="enEtelek_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_enEtelenMenu_enMenu">
+    <End Role="enEtelenMenu" Type="edmÉttermiSzoftver.Store.enEtelenMenu" Multiplicity="*" />
+    <End Role="enMenu" Type="edmÉttermiSzoftver.Store.enMenuk" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="enMenu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="enEtelenMenu">
+        <PropertyRef Name="enMenuk_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="edmÉttermiSzoftver" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -68,7 +233,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Asztal" Type="String" Nullable="false" />
-          <Property Name="Allapot" Type="String" Nullable="false" />
+          <Property Name="Allapot" Type="Byte" Nullable="false" />
           <Property Name="Megjegyzes" Type="String" Nullable="false" />
           <Property Name="Ido" Type="DateTime" Nullable="false" />
           <Property Name="Szamlaszam" Type="String" Nullable="false" />
@@ -91,13 +256,77 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="edmÉttermiSzoftver" />
-        <Alias Key="Target" Value="edmÉttermiSzoftver.Store" />
-        <EntityContainerMapping CdmEntityContainer="cnÉttermiSzoftver" StorageEntityContainer="edmÉttermiSzoftverTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="edmÉttermiSzoftverStoreContainer" CdmEntityContainer="cnÉttermiSzoftver">
+    <EntitySetMapping Name="enSzemelyek">
+      <EntityTypeMapping TypeName="IsTypeOf(edmÉttermiSzoftver.enSzemely)">
+        <MappingFragment StoreEntitySet="enSzemelyek">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nev" ColumnName="Nev" />
+          <ScalarProperty Name="Pozicio" ColumnName="Pozicio" />
+          <ScalarProperty Name="Jelszo" ColumnName="Jelszo" />
+          <ScalarProperty Name="SzulDatum" ColumnName="SzulDatum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enEtelek">
+      <EntityTypeMapping TypeName="IsTypeOf(edmÉttermiSzoftver.enEtel)">
+        <MappingFragment StoreEntitySet="enEtelek">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nev" ColumnName="Nev" />
+          <ScalarProperty Name="Ar" ColumnName="Ar" />
+          <ScalarProperty Name="Leiras" ColumnName="Leiras" />
+          <ScalarProperty Name="Tipus" ColumnName="Tipus" />
+          <ScalarProperty Name="KepURL" ColumnName="KepURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enMenuk">
+      <EntityTypeMapping TypeName="IsTypeOf(edmÉttermiSzoftver.enMenu)">
+        <MappingFragment StoreEntitySet="enMenuk">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="enRendelesek">
+      <EntityTypeMapping TypeName="IsTypeOf(edmÉttermiSzoftver.enRendeles)">
+        <MappingFragment StoreEntitySet="enRendelesek">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Asztal" ColumnName="Asztal" />
+          <ScalarProperty Name="Allapot" ColumnName="Allapot" />
+          <ScalarProperty Name="Megjegyzes" ColumnName="Megjegyzes" />
+          <ScalarProperty Name="Ido" ColumnName="Ido" />
+          <ScalarProperty Name="Szamlaszam" ColumnName="Szamlaszam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="enSzemelyenRendeles" TypeName="edmÉttermiSzoftver.enSzemelyenRendeles" StoreEntitySet="enSzemelyenRendeles">
+      <EndProperty Name="enSzemely">
+        <ScalarProperty Name="Id" ColumnName="enSzemelyek_Id" />
+      </EndProperty>
+      <EndProperty Name="enRendeles">
+        <ScalarProperty Name="Id" ColumnName="enRendelesek_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="enRendelesenEtel" TypeName="edmÉttermiSzoftver.enRendelesenEtel" StoreEntitySet="enRendelesenEtel">
+      <EndProperty Name="enRendeles">
+        <ScalarProperty Name="Id" ColumnName="enRendelesek_Id" />
+      </EndProperty>
+      <EndProperty Name="enEtel">
+        <ScalarProperty Name="Id" ColumnName="enEtelek_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="enEtelenMenu" TypeName="edmÉttermiSzoftver.enEtelenMenu" StoreEntitySet="enEtelenMenu">
+      <EndProperty Name="enEtel">
+        <ScalarProperty Name="Id" ColumnName="enEtelek_Id" />
+      </EndProperty>
+      <EndProperty Name="enMenu">
+        <ScalarProperty Name="Id" ColumnName="enMenuk_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -111,6 +340,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

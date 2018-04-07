@@ -33,7 +33,16 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -45,10 +54,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="edmÉttermiSzoftver.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>edmÉttermiSzoftver.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="edmÉttermiSzoftver.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>edmÉttermiSzoftver.tt</DependentUpon>
+    </Compile>
     <Compile Include="edmÉttermiSzoftver.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>edmÉttermiSzoftver.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="enEtel.cs">
+      <DependentUpon>edmÉttermiSzoftver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="enMenu.cs">
+      <DependentUpon>edmÉttermiSzoftver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="enRendeles.cs">
+      <DependentUpon>edmÉttermiSzoftver.tt</DependentUpon>
+    </Compile>
+    <Compile Include="enSzemely.cs">
+      <DependentUpon>edmÉttermiSzoftver.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,6 +94,23 @@
     <None Include="edmÉttermiSzoftver.edmx.diagram">
       <DependentUpon>edmÉttermiSzoftver.edmx</DependentUpon>
     </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="edmÉttermiSzoftver.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>edmÉttermiSzoftver.Context.cs</LastGenOutput>
+      <DependentUpon>edmÉttermiSzoftver.edmx</DependentUpon>
+    </Content>
+    <Content Include="edmÉttermiSzoftver.edmx.sql" />
+    <Content Include="edmÉttermiSzoftver.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>edmÉttermiSzoftver.cs</LastGenOutput>
+      <DependentUpon>edmÉttermiSzoftver.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
